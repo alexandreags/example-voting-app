@@ -1,11 +1,13 @@
 # Using official python runtime base image
-FROM python:3.9-slim
+FROM python:3.11
 
 # add curl for healthcheck
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+#RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list.d/debian.sources 
+#RUN sed -i 's|security.debian.org|archive.debian.org/debian-security/|g' /etc/apt/sources.list.d/debian.sources 
+#RUN sed -i '/stretch-updates/d' /etc/apt/sources.list.d/debian.sources
+RUN apt-get update 
+RUN apt-get install -y --no-install-recommends curl 
+RUN rm -rf /var/lib/apt/lists/*
 
 # Set the application directory
 WORKDIR /app
